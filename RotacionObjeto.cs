@@ -20,9 +20,10 @@ public class RotacionObjeto : MonoBehaviour
     }
     private void Update()
     {
+        //Se realiza estas condiciones para que a la hora de rotar el objeto no se pare en seco al cambiar de cara del cubo y detectar si esta usando el raton
+        //o el touch del dispositivo Android.
         if (!touchAnywhere)
         {
-            //No need to check if already rotating
             if (!m_rotating)
             {
                 RaycastHit hit;
