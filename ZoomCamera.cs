@@ -34,10 +34,11 @@ public class ZoomCamera : MonoBehaviour
 
         if (wheel != 0)
         {
+            //Se establece el limite en el que se puede desplazar el eje Z.
             movePosition += wheel * zoomSpeed;
             movePosition = Mathf.Clamp(movePosition, minZ, maxZ);
         }
-
+        //En cuanto la rueda del raton se mueva para hacer Zoom, se cumple la condicion.
         if (Mathf.Abs(movePosition - posZ) > 0.001f)
         {
             //Movimiento suavizado para que no sea brusco.
