@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class RotacionObjeto : MonoBehaviour
 {
-    [SerializeField] private LayerMask targetLayer;
+    private int layer = 8, layerMask;
+
     private float rotationRate = 0.8f;
-    [SerializeField] private bool touchAnywhere;
+    private bool touchAnywhere;
     private float m_previousX;
     private Camera m_camera;
     private bool m_rotating = false;
 
     private void Awake()
     {
+        //Transformar el numero de la capa a bits con desplazamiento para poder realizar el raycast
+        layerMask = (1 << layer);
         m_camera = Camera.main;
     }
-
     private void Update()
     {
         if (!touchAnywhere)
@@ -25,7 +27,7 @@ public class RotacionObjeto : MonoBehaviour
             {
                 RaycastHit hit;
                 Ray ray = m_camera.ScreenPointToRay(Input.mousePosition);
-                if (!Physics.Raycast(ray, out hit, 1000, targetLayer))
+                if (!Physics.Raycast(ray, out hit, 1000, layerMask))
                 {
                     return;
                 }
