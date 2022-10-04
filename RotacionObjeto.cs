@@ -9,7 +9,6 @@ public class RotacionObjeto : MonoBehaviour
 
     private float rotationRate = 0.8f;
     private float speed = 50f;
-    private bool touchAnywhere;
     private float m_previousX;
     private Camera m_camera;
     private bool m_rotating = false;
@@ -29,8 +28,6 @@ public class RotacionObjeto : MonoBehaviour
         
         //Se realiza estas condiciones para que a la hora de rotar el objeto no se pare en seco al cambiar de cara del cubo y detectar si esta usando el raton
         //o el touch del dispositivo Android.
-        if (!touchAnywhere)
-        {
             if (!m_rotating)
             {
                 RaycastHit hit;
@@ -40,7 +37,6 @@ public class RotacionObjeto : MonoBehaviour
                     return;
                 }
             }
-        }
 
         if (Input.GetMouseButtonDown(0))
         {
