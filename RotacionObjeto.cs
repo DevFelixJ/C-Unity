@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class RotacionObjeto : MonoBehaviour
@@ -8,11 +7,11 @@ public class RotacionObjeto : MonoBehaviour
     private int layer = 8, layerMask;
 
     private float rotationRate = 0.8f;
-    private float speed = 50f;
+    private bool touchAnywhere;
     private float m_previousX;
     private Camera m_camera;
     private bool m_rotating = false;
-    private bool shoulRotate = true;
+
     private void Awake()
     {
         //Transformar el numero de la capa a bits con desplazamiento para poder realizar el raycast
@@ -21,13 +20,10 @@ public class RotacionObjeto : MonoBehaviour
     }
     private void Update()
     {
-        if (shoulRotate)
-        {
-            transform.Rotate(Vector3.up * Time.deltaTime * speed);
-        }
-        
         //Se realiza estas condiciones para que a la hora de rotar el objeto no se pare en seco al cambiar de cara del cubo y detectar si esta usando el raton
         //o el touch del dispositivo Android.
+        if (!touchAnywhere)
+        {
             if (!m_rotating)
             {
                 RaycastHit hit;
@@ -37,10 +33,10 @@ public class RotacionObjeto : MonoBehaviour
                     return;
                 }
             }
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
-            shoulRotate = false;
             m_rotating = true;
             m_previousX = Input.mousePosition.x;
         }
@@ -49,7 +45,6 @@ public class RotacionObjeto : MonoBehaviour
         //Al mantener pulsado el raton primario(click izquierdo) se cumple la condicion de que se puede rotar el objeto
         if (Input.GetMouseButton(0))
         {
-            var touch = Input.mousePosition;
 
             //Logica para capturar el valor de la rotacion del eje X
             var deltaX = -(Input.mousePosition.x - m_previousX) * rotationRate;
