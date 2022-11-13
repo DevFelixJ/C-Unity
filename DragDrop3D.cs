@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEngine;
 public class DragDrop3D : MonoBehaviour
 {
@@ -7,9 +8,9 @@ public class DragDrop3D : MonoBehaviour
     private GameObject selectedObject;
 
 
-
    private void Update()
     {
+
         //Si le das click entramos en la siguiente funcion
         if (Input.GetMouseButtonDown(0))
         {
@@ -22,9 +23,9 @@ public class DragDrop3D : MonoBehaviour
                 //para luego poder desplazarlo
                 if(hit.collider != null)
                 {
-                    //Para que no haya un desastre monumental, se le indica a los GameObjects que pertenecen a la etiqueta "drag" 
+                    //Para que no haya un desastre monumental, se le indica a los GameObjects que pertenecen a la etiqueta "Apple" y "Cupcake"
                     //Para que a la hora de jugar no se arrastre cualquier GameObject.
-                    if (!hit.collider.CompareTag("drag"))
+                    if (!hit.collider.CompareTag("Apple") && !hit.collider.CompareTag("Cupcake"))
                     {
                         return;
                     }
@@ -76,5 +77,4 @@ public class DragDrop3D : MonoBehaviour
 
        return hit;
     }
-
 }
