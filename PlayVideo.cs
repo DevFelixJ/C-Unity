@@ -13,9 +13,9 @@ public class PlayVideo : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider drag)
+    private void OnTriggerEnter(Collider apple)
     {
-        if (drag.gameObject.tag == "drag")
+        if (apple.gameObject.tag == "Apple")
         {
             videoPlayer.SetActive(true);
             Destroy(videoPlayer, timeToStop);
